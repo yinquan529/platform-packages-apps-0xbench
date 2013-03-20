@@ -332,6 +332,8 @@ public abstract class Case {
                 jsonObj.put("units", s.mType);
                 jsonObj.put("result", "pass");
                 scenarioResult.put(jsonObj);
+/* for lava_test_shell */
+		Log.d(TAG,"0xbench_test_case: "+s.mName+" "+getBenchmark(s)+" "+s.mType+" "+"pass");
             }
         }
         catch (JSONException jsonE) {
