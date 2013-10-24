@@ -18,12 +18,12 @@
 
 package org.zeroxlab.zeroxbenchmark;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.os.Message;
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.webkit.WebView;
+import android.os.Bundle;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
+import android.webkit.WebView;
 
 public class TesterJavascript extends Tester {
 
@@ -34,7 +34,8 @@ public class TesterJavascript extends Tester {
     private String mResult = "";
     private String mFormattedResult = "";
 
-    @Override
+	@SuppressLint("SetJavaScriptEnabled")
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.javascript);
@@ -81,6 +82,7 @@ public class TesterJavascript extends Tester {
     }
 
     class MsgCallback {
+        @JavascriptInterface
         public void finish(String result, String formatted_result) {
             mResult = result;
             mFormattedResult = formatted_result;
