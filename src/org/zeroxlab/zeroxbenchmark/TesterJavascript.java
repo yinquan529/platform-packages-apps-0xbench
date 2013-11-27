@@ -17,7 +17,6 @@
  */
 
 package org.zeroxlab.zeroxbenchmark;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +26,7 @@ import android.webkit.WebView;
 
 public class TesterJavascript extends Tester {
 
+    protected String TAG = "TesterJavascript";
     protected WebView mWebView;
     protected WebSettings mSettings;
 
@@ -41,9 +41,9 @@ public class TesterJavascript extends Tester {
         setContentView(R.layout.javascript);
         mWebView = (WebView) findViewById(R.id.web);
 
+        mWebView.addJavascriptInterface(new MsgCallback(), "ANDROID_OBJ");
         mSettings = mWebView.getSettings();
         mSettings.setJavaScriptEnabled(true);
-        mWebView.addJavascriptInterface(new MsgCallback(), "ANDROID_OBJ");
 
         startTester();
     }
@@ -82,6 +82,7 @@ public class TesterJavascript extends Tester {
     }
 
     class MsgCallback {
+        @SuppressWarnings("unused")
         @JavascriptInterface
         public void finish(String result, String formatted_result) {
             mResult = result;

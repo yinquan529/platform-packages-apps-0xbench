@@ -19,10 +19,28 @@
 
 package org.zeroxlab.zeroxbenchmark;
 
-import android.util.Log;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import android.app.Activity;
-import android.app.ActivityManager;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.opensolaris.hub.libmicro.NativeCaseMicro;
+import org.zeroxlab.byteunix.NativeCaseUbench;
+import org.zeroxlab.utils.BenchUtil;
+
 import android.app.ProgressDialog;
 import android.app.TabActivity;
 import android.content.Context;
@@ -30,12 +48,12 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -53,29 +71,6 @@ import android.widget.ScrollView;
 import android.widget.TabHost;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TextView;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.lang.StringBuffer;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-import java.util.UUID;
-
-import org.json.JSONObject;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.opensolaris.hub.libmicro.NativeCaseMicro;
-import org.zeroxlab.byteunix.NativeCaseUbench;;
-import org.zeroxlab.utils.BenchUtil;
 
 /* Construct a basic UI */
 public class Benchmark extends TabActivity implements View.OnClickListener {
@@ -238,6 +233,7 @@ public class Benchmark extends TabActivity implements View.OnClickListener {
             mCheck3D = bundle.getBoolean("3d");
             mCheckVM = bundle.getBoolean("vm");
             mCheckNative = bundle.getBoolean("native");
+            mCheckMisc = bundle.getBoolean("misc");
             mAutoUpload = bundle.getBoolean("autoupload");
         }
 
