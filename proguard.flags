@@ -1,0 +1,4 @@
+-keepclasseswithmembers class org.zeroxlab.zeroxbenchmark.TesterJavascript$MsgCallback {
+  public <methods>;
+}
+
