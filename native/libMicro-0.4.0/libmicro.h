@@ -193,4 +193,10 @@ int 		sizetoint();
 int		fit_line(double *, double *, int, double *, double *);
 long long	get_nsecs_resolution();
 
+/* valloc(), used heavily in libmicro, is obsolete and doesn't
+ * exist anymore in 64-bit Bionic */
+#if defined(__BIONIC__) && (defined(__aarch64__) || defined(__x86_64__))
+#define valloc(size) memalign(sysconf(_SC_PAGESIZE), size)
+#endif
+
 #endif /* LIBMICRO_H */
